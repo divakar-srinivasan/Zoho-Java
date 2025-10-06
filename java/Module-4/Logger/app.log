@@ -1,0 +1,10 @@
+Sep 25, 2025 4:09:52 PM Logger.User login
+INFO: Divakar User logged in
+Sep 25, 2025 4:09:52 PM Logger.User login
+INFO: Arul User logged in
+Sep 25, 2025 4:09:52 PM Logger.User logout
+INFO: DivakarUser Logout 
+Sep 25, 2025 4:09:52 PM Logger.User logout
+INFO: ArulUser Logout 
+Sep 25, 2025 4:09:52 PM Logger.LoggerDemo main
+WARNING: Application going to sleep
