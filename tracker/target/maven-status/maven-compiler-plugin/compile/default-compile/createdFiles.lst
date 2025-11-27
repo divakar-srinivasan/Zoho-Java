@@ -1,0 +1,11 @@
+com/tracker/controller/UpdateTaskController.class
+com/tracker/service/TaskService.class
+com/tracker/util/DBConnection.class
+com/tracker/util/Log.class
+com/tracker/controller/DeleteTaskController.class
+com/tracker/controller/GetByIdController.class
+com/tracker/controller/sample.class
+com/tracker/controller/TaskController.class
+com/tracker/model/TaskModel.class
+com/tracker/dao/TaskDAO.class
+com/tracker/controller/GetAllTasksController.class
