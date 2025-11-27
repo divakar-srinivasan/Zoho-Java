@@ -1,0 +1,472 @@
+#!/bin/bash
+
+# COMPREHENSIVE INSTALLATION & TESTING GUIDE
+# ResourceManager Application
+
+cat << 'EOF'
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║           🚀 ResourceManager Application - Installation Guide 🚀           ║
+║                                                                            ║
+║              Complete Java Servlet Web Application with Authentication     ║
+║                      & SSL/TLS, Session Management & API                   ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+PROJECT LOCATION: /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 PREREQUISITE CHECK
+─────────────────────────────────────────────────────────────────────────────
+
+Required Software:
+  ✓ Java 8 or higher
+  ✓ Maven 3.6.0 or higher
+  ✓ PostgreSQL 12 or higher
+  ✓ Tomcat 9.0 or higher
+
+Run this to verify:
+
+    java -version
+    mvn -version
+    psql --version
+    ls $TOMCAT_HOME/bin/
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔧 INSTALLATION STEPS
+─────────────────────────────────────────────────────────────────────────────
+
+STEP 1: Navigate to Project Directory
+────────────────────────────────────────
+
+    cd /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager
+
+STEP 2: Build the Application with Maven
+──────────────────────────────────────────
+
+    mvn clean package -DskipTests
+
+    Expected output:
+    ✓ BUILD SUCCESS
+    ✓ ROOT.war created (size: ~3.6 MB)
+    ✓ Location: target/ROOT.war
+
+STEP 3: Setup PostgreSQL Database
+──────────────────────────────────
+
+    Option A - Using script:
+    ./setup-db.sh
+
+    Option B - Manual:
+    psql -U divakar-pt8008 -d postgres -f database-setup.sql
+
+    Database credentials (already configured):
+    - Username: divakar-pt8008
+    - Password: Divakar@2005
+    - Database: test
+    - Host: localhost
+    - Port: 5432
+
+    Verify database setup:
+    psql -U divakar-pt8008 -d test -c "SELECT COUNT(*) FROM users;"
+
+STEP 4: Generate SSL Certificate
+─────────────────────────────────
+
+    ./create-ssl-certificate.sh resourcemanager.local
+
+    This creates:
+    - Keystore: $TOMCAT_HOME/conf/resourcemanager-keystore.jks
+    - Key password: changeit
+    - Store password: changeit
+    - Valid for: 365 days
+
+STEP 5: Update /etc/hosts File
+───────────────────────────────
+
+    echo "127.0.0.1 resourcemanager.local" | sudo tee -a /etc/hosts
+
+    Verify:
+    cat /etc/hosts | grep resourcemanager.local
+
+STEP 6: Deploy to Tomcat
+────────────────────────
+
+    cp target/ROOT.war $TOMCAT_HOME/webapps/
+
+    Location:
+    $TOMCAT_HOME/webapps/ROOT.war
+
+STEP 7: Configure Tomcat SSL (server.xml)
+──────────────────────────────────────────
+
+    Edit: $TOMCAT_HOME/conf/server.xml
+
+    Add this connector inside <Service> element:
+
+    <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+               maxThreads="150" SSLEnabled="true">
+        <SSLHostConfig hostName="resourcemanager.local" certificateVerification="none">
+            <Certificate certificateKeyFile="/usr/local/tomcat/conf/resourcemanager-keystore.jks"
+                         certificateKeystorePassword="changeit"
+                         type="JKS" />
+        </SSLHostConfig>
+    </Connector>
+
+    Or copy from: ssl-connector-config.xml
+
+STEP 8: Start Tomcat
+────────────────────
+
+    $TOMCAT_HOME/bin/startup.sh
+
+    Check if running:
+    ps aux | grep tomcat
+
+    Logs:
+    tail -f $TOMCAT_HOME/logs/catalina.out
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🌐 ACCESSING THE APPLICATION
+─────────────────────────────────────────────────────────────────────────────
+
+HTTP (Port 8080):
+    http://localhost:8080
+    http://localhost:8080/login.jsp
+
+HTTPS (Port 8443, using SSL):
+    https://resourcemanager.local:8443
+    https://resourcemanager.local:8443/login.jsp
+
+Default Login Credentials:
+    Username: admin
+    Password: admin
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🧪 TESTING THE APPLICATION
+─────────────────────────────────────────────────────────────────────────────
+
+AUTOMATED TESTING:
+──────────────────
+
+    Run all tests:
+    ./test-application.sh
+
+    Tests include:
+    ✓ Login page accessibility
+    ✓ Failed login handling
+    ✓ Successful login
+    ✓ Protected page access
+    ✓ Resource API endpoint
+    ✓ Session validation
+    ✓ Logout functionality
+
+MANUAL TESTING:
+───────────────
+
+Test 1: Login
+    curl -X POST https://resourcemanager.local:8443/login \
+      -d "username=admin&password=admin" \
+      -k -c /tmp/cookies.txt -L
+
+Test 2: Access Protected Page
+    curl https://resourcemanager.local:8443/home.jsp \
+      -k -b /tmp/cookies.txt
+
+Test 3: Test API Endpoint
+    curl https://resourcemanager.local:8443/api/v1/resourcemanager/resource/1 \
+      -k -b /tmp/cookies.txt
+
+    Expected response:
+    {"id":"res1","name":"Database Server"}
+
+Test 4: Logout
+    curl https://resourcemanager.local:8443/logout \
+      -k -b /tmp/cookies.txt
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 FEATURES VERIFICATION
+─────────────────────────────────────────────────────────────────────────────
+
+✓ Login Page
+  - Username input field
+  - Password input field
+  - Submit button
+  - Error message display
+  - Responsive design
+
+✓ Home Page / Dashboard
+  - Top navigation bar with branding
+  - Left sidebar with menu
+  - User profile with avatar
+  - Dropdown menu with logout
+  - jQuery AJAX data loading
+
+✓ API Endpoint
+  - Path: /api/v1/resourcemanager/{resource-name}/{resource-id}
+  - Returns JSON: {"id":"...", "name":"..."}
+  - Supports GET and POST
+  - Error handling
+
+✓ Authentication Filter
+  - Session validation
+  - Redirect to login if expired
+  - Public path exceptions
+
+✓ Session Management
+  - 5-minute timeout
+  - Auto-invalidation
+  - Automatic re-login on expiry
+
+✓ Logging
+  - Location: /tmp/resourcemanager.log
+  - Login events
+  - API requests
+  - Exceptions
+
+✓ SSL/TLS
+  - HTTPS on port 8443
+  - Custom domain support
+  - Self-signed certificate
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📝 USEFUL COMMANDS
+─────────────────────────────────────────────────────────────────────────────
+
+View Application Logs:
+    tail -f /tmp/resourcemanager.log
+
+View Tomcat Logs:
+    tail -f $TOMCAT_HOME/logs/catalina.out
+
+Check Java Processes:
+    ps aux | grep java
+
+List Open Ports:
+    lsof -i :8080
+    lsof -i :8443
+
+Stop Tomcat:
+    $TOMCAT_HOME/bin/shutdown.sh
+
+Check Tomcat Status:
+    curl http://localhost:8080
+
+Check PostgreSQL Connection:
+    psql -U divakar-pt8008 -d test
+
+List SSL Certificates:
+    keytool -list -v -keystore $TOMCAT_HOME/conf/resourcemanager-keystore.jks \
+      -storepass changeit
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔍 TROUBLESHOOTING
+─────────────────────────────────────────────────────────────────────────────
+
+Problem: Database Connection Failed
+─────────────────────────────────────
+
+    Solution:
+    1. Check PostgreSQL is running:
+       sudo systemctl status postgresql
+
+    2. Verify credentials:
+       psql -U divakar-pt8008 -d test
+
+    3. Check database tables:
+       psql -U divakar-pt8008 -d test -c "SELECT * FROM users LIMIT 1;"
+
+Problem: SSL Certificate Issues
+─────────────────────────────────
+
+    Solution:
+    1. Verify certificate exists:
+       ls -la $TOMCAT_HOME/conf/resourcemanager-keystore.jks
+
+    2. List certificate:
+       keytool -list -keystore $TOMCAT_HOME/conf/resourcemanager-keystore.jks \
+         -storepass changeit
+
+    3. Verify domain in /etc/hosts:
+       cat /etc/hosts | grep resourcemanager.local
+
+Problem: Port Already in Use
+────────────────────────────
+
+    Solution:
+    1. Find process using port 8080:
+       lsof -i :8080
+
+    2. Kill the process:
+       kill -9 <PID>
+
+    3. Or change Tomcat port in server.xml
+
+Problem: Application Not Starting
+──────────────────────────────────
+
+    Solution:
+    1. Check Tomcat logs:
+       tail -50 $TOMCAT_HOME/logs/catalina.out
+
+    2. Check application logs:
+       tail -50 /tmp/resourcemanager.log
+
+    3. Verify WAR file deployed:
+       ls -la $TOMCAT_HOME/webapps/ROOT*
+
+    4. Check Java memory:
+       free -h
+
+Problem: Session Expires Too Quickly
+────────────────────────────────────
+
+    Solution:
+    1. Modify in LoginServlet.java:
+       private static final long SESSION_TIMEOUT = 5 * 60 * 1000;
+       // Change 5 to desired minutes
+
+    2. Rebuild:
+       mvn clean package -DskipTests
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📦 DEPLOYMENT PACKAGE CONTENTS
+─────────────────────────────────────────────────────────────────────────────
+
+Source Code Files:
+  ✓ src/main/java/com/resourcemanager/servlet/LoginServlet.java
+  ✓ src/main/java/com/resourcemanager/servlet/LogoutServlet.java
+  ✓ src/main/java/com/resourcemanager/servlet/ResourceServlet.java
+  ✓ src/main/java/com/resourcemanager/filter/AuthenticationFilter.java
+  ✓ src/main/java/com/resourcemanager/dao/UserDAO.java
+  ✓ src/main/java/com/resourcemanager/dao/ResourceDAO.java
+  ✓ src/main/java/com/resourcemanager/util/DatabaseConnection.java
+  ✓ src/main/java/com/resourcemanager/util/Logger.java
+  ✓ src/main/webapp/login.jsp
+  ✓ src/main/webapp/home.jsp
+  ✓ src/main/webapp/index.jsp
+  ✓ src/main/webapp/css/style.css
+  ✓ src/main/webapp/WEB-INF/web.xml
+
+Build Artifacts:
+  ✓ target/ROOT.war (3.6 MB - Ready for deployment)
+  ✓ target/original-ROOT.war
+  ✓ lib/ (All dependencies)
+
+Configuration Files:
+  ✓ pom.xml
+  ✓ database-setup.sql
+  ✓ ssl-connector-config.xml
+  ✓ dependency-reduced-pom.xml
+
+Automation Scripts:
+  ✓ build.sh
+  ✓ setup-db.sh
+  ✓ create-ssl-certificate.sh
+  ✓ deploy-to-tomcat.sh
+  ✓ complete-deployment.sh
+  ✓ quickstart.sh
+  ✓ test-application.sh
+
+Documentation:
+  ✓ README.md
+  ✓ DEPLOYMENT_GUIDE.md
+  ✓ PROJECT_SUMMARY.md
+  ✓ index.html
+  ✓ example-logs.txt
+  ✓ INSTALLATION_GUIDE.txt (This file)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📝 QUICK START (One-Command Deployment)
+─────────────────────────────────────────────────────────────────────────────
+
+If you have all prerequisites installed, run:
+
+    cd /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager
+    ./complete-deployment.sh
+
+This will automatically:
+  1. Build the application
+  2. Setup database
+  3. Generate SSL certificate
+  4. Update /etc/hosts
+  5. Deploy to Tomcat
+  6. Create deployment artifacts
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ POST-DEPLOYMENT VERIFICATION
+─────────────────────────────────────────────────────────────────────────────
+
+After deployment, verify:
+
+    1. Tomcat is running:
+       ps aux | grep tomcat
+
+    2. Application is accessible:
+       curl http://localhost:8080
+       Response: Status 302 or welcome page
+
+    3. Login works:
+       Access: http://localhost:8080/login.jsp
+       Username: admin
+       Password: admin
+
+    4. Database connection works:
+       View logs: tail /tmp/resourcemanager.log
+       Look for: "User login successful"
+
+    5. API endpoint works:
+       After login, check: curl -b cookies.txt \
+       https://resourcemanager.local:8443/api/v1/resourcemanager/resource/1
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📞 GETTING HELP
+─────────────────────────────────────────────────────────────────────────────
+
+Check these files for detailed information:
+
+  README.md              - Complete project documentation
+  DEPLOYMENT_GUIDE.md   - Detailed deployment instructions
+  PROJECT_SUMMARY.md    - Project statistics and overview
+  index.html            - HTML project summary
+  example-logs.txt      - Example log output
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎉 SUCCESS CRITERIA
+─────────────────────────────────────────────────────────────────────────────
+
+You have successfully deployed when:
+
+  ✓ Login page accessible at http://localhost:8080/login.jsp
+  ✓ Can login with admin/admin
+  ✓ Home page loads with user profile
+  ✓ API endpoint returns resource data
+  ✓ Session times out after 5 minutes
+  ✓ Logout works correctly
+  ✓ SSL certificate accessible at https://resourcemanager.local:8443
+  ✓ Logs show all events in /tmp/resourcemanager.log
+
+═══════════════════════════════════════════════════════════════════════════════
+
+END OF INSTALLATION GUIDE
+
+Generated: November 17, 2025
+Project: ResourceManager v1.0.0
+Location: /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager
+
+═══════════════════════════════════════════════════════════════════════════════
+
+EOF

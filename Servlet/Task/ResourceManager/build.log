@@ -1,0 +1,65 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------< [0;36mcom.resourcemanager:ResourceManager[0;1m >-----------------[m
+[[1;34mINFO[m] [1mBuilding ResourceManager 1.0.0[m
+[[1;34mINFO[m] [1m--------------------------------[ war ]---------------------------------[m
+[[1;33mWARNING[m] The artifact org.slf4j:slf4j-log4j12:jar:2.0.5 has been relocated to org.slf4j:slf4j-reload4j:jar:2.0.5
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:2.5:clean[m [1m(default-clean)[m @ [36mResourceManager[0;1m ---[m
+[[1;34mINFO[m] Deleting /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mResourceManager[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.10.1:compile[m [1m(default-compile)[m @ [36mResourceManager[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 8 source files to /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager/target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:testResources[m [1m(default-testResources)[m @ [36mResourceManager[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.10.1:testCompile[m [1m(default-testCompile)[m @ [36mResourceManager[0;1m ---[m
+[[1;34mINFO[m] No sources to compile
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:2.12.4:test[m [1m(default-test)[m @ [36mResourceManager[0;1m ---[m
+[[1;34mINFO[m] Tests are skipped.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-war-plugin:3.3.2:war[m [1m(default-war)[m @ [36mResourceManager[0;1m ---[m
+[[1;34mINFO[m] Packaging webapp
+[[1;34mINFO[m] Assembling webapp [ResourceManager] in [/home/divakar-pt8008/Documents/Servlet/Task/ResourceManager/target/ResourceManager-1.0.0]
+[[1;34mINFO[m] Processing war project
+[[1;34mINFO[m] Copying webapp resources [/home/divakar-pt8008/Documents/Servlet/Task/ResourceManager/src/main/webapp]
+[[1;34mINFO[m] Building war: /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager/target/ROOT.war
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-shade-plugin:3.4.1:shade[m [1m(default)[m @ [36mResourceManager[0;1m ---[m
+[[1;34mINFO[m] Including org.postgresql:postgresql:jar:42.5.0 in the shaded jar.
+[[1;34mINFO[m] Including org.checkerframework:checker-qual:jar:3.5.0 in the shaded jar.
+[[1;34mINFO[m] Including com.google.code.gson:gson:jar:2.10.1 in the shaded jar.
+[[1;34mINFO[m] Including org.slf4j:slf4j-api:jar:2.0.5 in the shaded jar.
+[[1;34mINFO[m] Including org.slf4j:slf4j-reload4j:jar:2.0.5 in the shaded jar.
+[[1;34mINFO[m] Including ch.qos.reload4j:reload4j:jar:1.2.22 in the shaded jar.
+[[1;34mINFO[m] Dependency-reduced POM written at: /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager/dependency-reduced-pom.xml
+[[1;33mWARNING[m] The artifact org.slf4j:slf4j-log4j12:jar:2.0.5 has been relocated to org.slf4j:slf4j-reload4j:jar:2.0.5
+[[1;33mWARNING[m] postgresql-42.5.0.jar, reload4j-1.2.22.jar define 1 overlapping resource: 
+[[1;33mWARNING[m]   - META-INF/LICENSE
+[[1;33mWARNING[m] gson-2.10.1.jar, slf4j-api-2.0.5.jar define 1 overlapping classes: 
+[[1;33mWARNING[m]   - META-INF.versions.9.module-info
+[[1;33mWARNING[m] ROOT.war, checker-qual-3.5.0.jar, gson-2.10.1.jar, postgresql-42.5.0.jar, reload4j-1.2.22.jar, slf4j-api-2.0.5.jar, slf4j-reload4j-2.0.5.jar define 1 overlapping resource: 
+[[1;33mWARNING[m]   - META-INF/MANIFEST.MF
+[[1;33mWARNING[m] maven-shade-plugin has detected that some class files are
+[[1;33mWARNING[m] present in two or more JARs. When this happens, only one
+[[1;33mWARNING[m] single version of the class is copied to the uber jar.
+[[1;33mWARNING[m] Usually this is not harmful and you can skip these warnings,
+[[1;33mWARNING[m] otherwise try to manually exclude artifacts based on
+[[1;33mWARNING[m] mvn dependency:tree -Ddetail=true and the above output.
+[[1;33mWARNING[m] See https://maven.apache.org/plugins/maven-shade-plugin/
+[[1;34mINFO[m] Replacing original artifact with shaded artifact.
+[[1;34mINFO[m] Replacing /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager/target/ROOT.war with /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager/target/ResourceManager-1.0.0-shaded.war
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  2.190 s
+[[1;34mINFO[m] Finished at: 2025-11-17T13:03:32+05:30
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m

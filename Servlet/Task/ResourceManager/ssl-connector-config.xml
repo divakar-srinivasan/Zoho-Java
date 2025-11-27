@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    This is the SSL/TLS Connector configuration for Tomcat server.xml
+    Add this connector to your existing server.xml file within the <Service> element.
+    
+    Default Location: /usr/local/tomcat/conf/server.xml or $CATALINA_HOME/conf/server.xml
+    
+    Make sure to:
+    1. Replace keystoreFile path with your actual keystore location
+    2. Update keystorePass with your keystore password
+    3. Update keyPass with your key password
+    4. The domain name in certificate should match your hostname
+-->
+
+<!-- SSL/TLS Connector Configuration -->
+<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+           maxThreads="150" SSLEnabled="true">
+    <SSLHostConfig hostName="resourcemanager.local" certificateVerification="none">
+        <Certificate certificateKeyFile="/usr/local/tomcat/conf/resourcemanager-keystore.jks"
+                     certificateKeystorePassword="changeit"
+                     type="JKS" />
+    </SSLHostConfig>
+</Connector>
+
+<!-- Alternative: Using PKCS12 format -->
+<!--
+<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+           maxThreads="150" SSLEnabled="true">
+    <SSLHostConfig hostName="resourcemanager.local">
+        <Certificate certificateKeyFile="/usr/local/tomcat/conf/resourcemanager-keystore.p12"
+                     certificateKeystorePassword="changeit"
+                     type="PKCS12" />
+    </SSLHostConfig>
+</Connector>
+-->

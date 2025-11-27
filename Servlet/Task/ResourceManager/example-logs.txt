@@ -1,0 +1,16 @@
+[2025-11-17 13:00:15] INFO - User login successful: admin
+[2025-11-17 13:00:16] INFO - Session created for user: admin with ID: ABC123DEF456GHI789
+[2025-11-17 13:00:17] INFO - User authenticated: admin - Accessing: /home.jsp
+[2025-11-17 13:00:18] DEBUG - User authenticated: admin - Accessing: /api/v1/resourcemanager/resource/1
+[2025-11-17 13:00:19] INFO - Resource API called - Resource: resource, ID: 1
+[2025-11-17 13:00:19] INFO - Resource fetched successfully - ID: res1, Name: Database Server
+[2025-11-17 13:00:19] INFO - Resource API - Success for ID: 1
+[2025-11-17 13:00:25] INFO - User login attempt failed: wronguser - Invalid credentials
+[2025-11-17 13:00:26] ERROR - Database error during user validation for: wronguser -> Connection timeout
+[2025-11-17 13:05:20] INFO - Session invalid/expired for path: /home.jsp - Redirecting to login
+[2025-11-17 13:05:21] INFO - User login successful: admin
+[2025-11-17 13:05:22] INFO - Session created for user: admin with ID: XYZ789ABC456DEF123
+[2025-11-17 13:05:40] INFO - User logout: admin
+[2025-11-17 13:05:41] INFO - Session invalid/expired for path: /home.jsp - Redirecting to login
+[2025-11-17 13:06:00] INFO - Authentication Filter initialized
+[2025-11-17 13:06:00] INFO - Authentication Filter destroyed

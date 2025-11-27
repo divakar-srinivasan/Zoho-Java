@@ -1,0 +1,8 @@
+com/resourcemanager/dao/ResourceDAO.class
+com/resourcemanager/servlet/LoginServlet.class
+com/resourcemanager/servlet/ResourceServlet.class
+com/resourcemanager/util/Logger.class
+com/resourcemanager/util/DatabaseConnection.class
+com/resourcemanager/servlet/LogoutServlet.class
+com/resourcemanager/dao/UserDAO.class
+com/resourcemanager/filter/AuthenticationFilter.class

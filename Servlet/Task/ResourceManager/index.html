@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResourceManager - Project Summary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+
+        .card h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d73a49;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            color: inherit;
+            padding: 0;
+            background: none;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tech-item {
+            background: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .tech-item strong {
+            color: #667eea;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+
+        .success {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+
+        button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #764ba2;
+        }
+
+        .file-tree {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5568d3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 ResourceManager Application</h1>
+            <p>Complete Servlet-based Web Application with Authentication & API</p>
+            <span class="status-badge status-success">✓ Build Successful</span>
+            <span class="status-badge status-info">Java & PostgreSQL</span>
+        </header>
+
+        <div class="section">
+            <h2>📋 Project Overview</h2>
+            <p>ResourceManager is a complete web application demonstrating enterprise-level Java servlet development with:</p>
+            <ul class="feature-list">
+                <li>Multi-page web application (Login, Home/Dashboard)</li>
+                <li>RESTful API endpoint for resource management</li>
+                <li>Authentication & Session Management</li>
+                <li>Authorization Filter for protected resources</li>
+                <li>PostgreSQL Database Integration</li>
+                <li>Comprehensive Application Logging</li>
+                <li>SSL/TLS Configuration</li>
+                <li>Responsive UI with jQuery AJAX</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>✨ Key Features Implemented</h2>
+            
+            <h3>1. Login Page</h3>
+            <div class="card">
+                <p>✓ Username and password input fields</p>
+                <p>✓ Form validation and error messages</p>
+                <p>✓ Session creation on successful login</p>
+                <p>✓ 5-minute session timeout</p>
+                <p><strong>Default Credentials:</strong> admin / admin</p>
+            </div>
+
+            <h3>2. Home Page / Dashboard</h3>
+            <div class="card">
+                <p>✓ Top Navigation Bar with branding</p>
+                <p>✓ Left Sidebar with navigation menu</p>
+                <p>✓ User profile with avatar and dropdown</p>
+                <p>✓ Logout functionality in dropdown menu</p>
+                <p>✓ Dynamic content loading with jQuery AJAX</p>
+            </div>
+
+            <h3>3. API Endpoint</h3>
+            <div class="card">
+                <p><code>/api/v1/resourcemanager/{resource-name}/{resource-id}</code></p>
+                <p>✓ GET method returns JSON: {id, name}</p>
+                <p>✓ POST method for resource creation</p>
+                <p>✓ Proper error handling & HTTP status codes</p>
+                <p>✓ Comprehensive API logging</p>
+            </div>
+
+            <h3>4. Authentication & Authorization</h3>
+            <div class="card">
+                <p>✓ ServletFilter validates session on each request</p>
+                <p>✓ Redirects to login if session invalid/expired</p>
+                <p>✓ Public path handling (CSS, JS, login)</p>
+                <p>✓ HTTP-Only & Secure cookie flags</p>
+            </div>
+
+            <h3>5. Logging System</h3>
+            <div class="card">
+                <p>✓ Login success/failure logging</p>
+                <p>✓ Logout event logging</p>
+                <p>✓ API request/response logging</p>
+                <p>✓ Exception logging with stack traces</p>
+                <p><strong>Log File:</strong> /tmp/resourcemanager.log</p>
+            </div>
+
+            <h3>6. Database Integration</h3>
+            <div class="card">
+                <p>✓ PostgreSQL connection pooling</p>
+                <p>✓ User authentication from database</p>
+                <p>✓ Resource data retrieval</p>
+                <p>✓ SQL injection prevention (Prepared Statements)</p>
+                <p><strong>Database:</strong> test (PostgreSQL)</p>
+            </div>
+
+            <h3>7. SSL/TLS Configuration</h3>
+            <div class="card">
+                <p>✓ Self-signed certificate generation</p>
+                <p>✓ Custom domain support (resourcemanager.local)</p>
+                <p>✓ Tomcat SSL connector configuration</p>
+                <p>✓ HTTPS on port 8443</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🛠️ Technology Stack</h2>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>Java</strong>
+                    <p>8 or higher</p>
+                </div>
+                <div class="tech-item">
+                    <strong>Servlet API</strong>
+                    <p>4.0.1</p>
+                </div>
+                <div class="tech-item">
+                    <strong>Maven</strong>
+                    <p>3.6.0+</p>
+                </div>
+                <div class="tech-item">
+                    <strong>Tomcat</strong>
+                    <p>9.0+</p>
+                </div>
+                <div class="tech-item">
+                    <strong>PostgreSQL</strong>
+                    <p>12+</p>
+                </div>
+                <div class="tech-item">
+                    <strong>JDBC Driver</strong>
+                    <p>PostgreSQL 42.5.0</p>
+                </div>
+                <div class="tech-item">
+                    <strong>JSON Processing</strong>
+                    <p>GSON 2.10.1</p>
+                </div>
+                <div class="tech-item">
+                    <strong>Logging</strong>
+                    <p>SLF4J 2.0.5</p>
+                </div>
+                <div class="tech-item">
+                    <strong>Frontend</strong>
+                    <p>jQuery 3.6.0</p>
+                </div>
+                <div class="tech-item">
+                    <strong>CSS</strong>
+                    <p>CSS3 with Flexbox & Grid</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📁 Project Structure</h2>
+            <pre class="file-tree">ResourceManager/
+├── src/main/java/com/resourcemanager/
+│   ├── servlet/
+│   │   ├── LoginServlet.java
+│   │   ├── LogoutServlet.java
+│   │   └── ResourceServlet.java
+│   ├── filter/
+│   │   └── AuthenticationFilter.java
+│   ├── dao/
+│   │   ├── UserDAO.java
+│   │   └── ResourceDAO.java
+│   └── util/
+│       ├── DatabaseConnection.java
+│       └── Logger.java
+├── src/main/webapp/
+│   ├── login.jsp
+│   ├── home.jsp
+│   ├── index.jsp
+│   ├── css/style.css
+│   └── WEB-INF/web.xml
+├── pom.xml
+├── target/
+│   └── ROOT.war
+├── database-setup.sql
+└── Scripts...
+            </pre>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Quick Start Guide</h2>
+            
+            <h3>Step 1: Build the Application</h3>
+            <pre><code>cd /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager
+mvn clean package -DskipTests</code></pre>
+
+            <h3>Step 2: Setup Database</h3>
+            <pre><code>psql -U divakar-pt8008 -d postgres -f database-setup.sql</code></pre>
+
+            <h3>Step 3: Generate SSL Certificate</h3>
+            <pre><code>./create-ssl-certificate.sh resourcemanager.local</code></pre>
+
+            <h3>Step 4: Update /etc/hosts</h3>
+            <pre><code>echo "127.0.0.1 resourcemanager.local" | sudo tee -a /etc/hosts</code></pre>
+
+            <h3>Step 5: Deploy to Tomcat</h3>
+            <pre><code>cp target/ROOT.war $TOMCAT_HOME/webapps/
+$TOMCAT_HOME/bin/startup.sh</code></pre>
+
+            <h3>Step 6: Access Application</h3>
+            <pre><code>HTTP:  http://localhost:8080
+HTTPS: https://resourcemanager.local:8443
+
+Login with: admin / admin</code></pre>
+
+            <div class="highlight success">
+                <strong>✓ Complete automation available:</strong><br>
+                Run <code>./complete-deployment.sh</code> to automate all steps
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧪 API Testing</h2>
+
+            <h3>Login Example</h3>
+            <pre><code>curl -X POST https://resourcemanager.local:8443/login \
+  -d "username=admin&password=admin" \
+  -k -c cookies.txt</code></pre>
+
+            <h3>Get Resource</h3>
+            <pre><code>curl https://resourcemanager.local:8443/api/v1/resourcemanager/resource/1 \
+  -k -b cookies.txt</code></pre>
+
+            <h3>Response</h3>
+            <pre><code>{
+  "id": "res1",
+  "name": "Database Server"
+}</code></pre>
+
+            <h3>Logout Example</h3>
+            <pre><code>curl https://resourcemanager.local:8443/logout \
+  -k -b cookies.txt</code></pre>
+
+            <div class="highlight success">
+                <strong>✓ Automated testing available:</strong><br>
+                Run <code>./test-application.sh</code> to test all endpoints
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Session & Timeout Management</h2>
+            <div class="card">
+                <h4>Session Configuration</h4>
+                <p><strong>Timeout:</strong> 5 minutes (300 seconds)</p>
+                <p><strong>Storage:</strong> Server-side with JSESSIONID</p>
+                <p><strong>Security:</strong> HTTP-Only & Secure flags enabled</p>
+                <p><strong>Attributes:</strong> username, userId</p>
+            </div>
+
+            <div class="card">
+                <h4>Expiration Behavior</h4>
+                <p>✓ Timer starts on login</p>
+                <p>✓ Resets on each page access</p>
+                <p>✓ Auto-invalidates after 5 minutes of inactivity</p>
+                <p>✓ Next request redirects to login page</p>
+                <p>✓ Logout event logged immediately</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📝 Logging Examples</h2>
+            <pre><code>[2025-11-17 13:00:15] INFO - User login successful: admin
+[2025-11-17 13:00:16] INFO - Session created for user: admin with ID: ABC123DEF456GHI789
+[2025-11-17 13:00:18] DEBUG - User authenticated: admin - Accessing: /api/v1/resourcemanager/resource/1
+[2025-11-17 13:00:19] INFO - Resource fetched successfully - ID: res1, Name: Database Server
+[2025-11-17 13:05:40] INFO - User logout: admin</code></pre>
+
+            <p><strong>Log Location:</strong> /tmp/resourcemanager.log</p>
+            <p><strong>View Logs:</strong> <code>tail -f /tmp/resourcemanager.log</code></p>
+        </div>
+
+        <div class="section">
+            <h2>📦 Deployment Package Contents</h2>
+            <div class="grid">
+                <div class="card">
+                    <h4>Source Code</h4>
+                    <p>✓ All .java files</p>
+                    <p>✓ All .jsp files</p>
+                    <p>✓ pom.xml configuration</p>
+                </div>
+                <div class="card">
+                    <h4>Build Artifacts</h4>
+                    <p>✓ ROOT.war</p>
+                    <p>✓ ResourceManager.jar</p>
+                    <p>✓ Dependencies in lib/</p>
+                </div>
+                <div class="card">
+                    <h4>Configuration</h4>
+                    <p>✓ web.xml</p>
+                    <p>✓ ssl-connector-config.xml</p>
+                    <p>✓ database-setup.sql</p>
+                </div>
+                <div class="card">
+                    <h4>Scripts</h4>
+                    <p>✓ build.sh</p>
+                    <p>✓ setup-db.sh</p>
+                    <p>✓ complete-deployment.sh</p>
+                </div>
+                <div class="card">
+                    <h4>Logs & Certificates</h4>
+                    <p>✓ /tmp/resourcemanager.log</p>
+                    <p>✓ Tomcat logs</p>
+                    <p>✓ server.xml with SSL</p>
+                </div>
+                <div class="card">
+                    <h4>Documentation</h4>
+                    <p>✓ README.md</p>
+                    <p>✓ DEPLOYMENT_GUIDE.md</p>
+                    <p>✓ This index.html</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔒 Security Features</h2>
+            <ul class="feature-list">
+                <li>Session-based authentication</li>
+                <li>HTTP-Only cookies</li>
+                <li>Secure flag on cookies</li>
+                <li>HTTPS/SSL support</li>
+                <li>SQL injection prevention (Prepared Statements)</li>
+                <li>Session timeout enforcement</li>
+                <li>Authentication Filter on all requests</li>
+                <li>Password hashing ready (currently plain for demo)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📱 Responsive Design</h2>
+            <ul class="feature-list">
+                <li>Mobile-friendly login page</li>
+                <li>Responsive navigation bar</li>
+                <li>Collapsible sidebar on small screens</li>
+                <li>Grid-based resource layout</li>
+                <li>Touch-friendly buttons and inputs</li>
+                <li>CSS3 Flexbox and Grid layouts</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>⚙️ Available Scripts</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f0f0f0;">
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Script</th>
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;"><code>build.sh</code></td>
+                        <td style="padding: 10px;">Build the project with Maven</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;"><code>setup-db.sh</code></td>
+                        <td style="padding: 10px;">Setup PostgreSQL database</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;"><code>create-ssl-certificate.sh</code></td>
+                        <td style="padding: 10px;">Generate self-signed SSL certificate</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;"><code>deploy-to-tomcat.sh</code></td>
+                        <td style="padding: 10px;">Deploy WAR to Tomcat</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;"><code>complete-deployment.sh</code></td>
+                        <td style="padding: 10px;">Run all deployment steps</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;"><code>quickstart.sh</code></td>
+                        <td style="padding: 10px;">Quick start already deployed app</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><code>test-application.sh</code></td>
+                        <td style="padding: 10px;">Run automated tests</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🐛 Troubleshooting</h2>
+            
+            <h3>Database Connection Issues</h3>
+            <pre><code># Check PostgreSQL is running
+sudo systemctl status postgresql
+
+# Verify database exists
+psql -U divakar-pt8008 -d test -c "SELECT COUNT(*) FROM users;"</code></pre>
+
+            <h3>SSL Certificate Issues</h3>
+            <pre><code># List certificates
+keytool -list -v -keystore $TOMCAT_HOME/conf/resourcemanager-keystore.jks
+
+# Verify hosts file
+cat /etc/hosts | grep resourcemanager.local</code></pre>
+
+            <h3>Application Logs</h3>
+            <pre><code># View application logs
+tail -f /tmp/resourcemanager.log
+
+# View Tomcat logs
+tail -f $TOMCAT_HOME/logs/catalina.out</code></pre>
+
+            <h3>Port Already in Use</h3>
+            <pre><code># Find process using port 8080
+lsof -i :8080
+
+# Find process using port 8443
+lsof -i :8443</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>✅ Checklist Before Deployment</h2>
+            <ul class="feature-list">
+                <li>Java 8+ installed and available in PATH</li>
+                <li>Maven 3.6.0+ installed</li>
+                <li>PostgreSQL 12+ running and accessible</li>
+                <li>Tomcat 9.0+ installed</li>
+                <li>Port 8080, 8443 available</li>
+                <li>Database credentials configured</li>
+                <li>Project built successfully (ROOT.war generated)</li>
+                <li>SSL certificate generated</li>
+                <li>/etc/hosts updated with domain</li>
+                <li>Tomcat server.xml updated with SSL connector</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>ResourceManager Application v1.0.0 | Built with Java Servlets & PostgreSQL</p>
+            <p>Location: /home/divakar-pt8008/Documents/Servlet/Task/ResourceManager</p>
+            <p>© 2025 - All Rights Reserved</p>
+        </footer>
+    </div>
+</body>
+</html>
